@@ -1,0 +1,25 @@
+.dynamic-content-section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+body[data-theme='dark'] .dynamic-content-section {
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.dynamic-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.dynamic-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}

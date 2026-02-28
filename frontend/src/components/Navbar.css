@@ -1,0 +1,174 @@
+.navbar {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    transition: background-color 0.3s ease-in-out;
+}
+
+body[data-theme='light'] .navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme='dark'] .navbar {
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 24px;
+}
+
+.navbar-logo {
+    justify-self: start;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    color: var(--primary-light);
+}
+
+body[data-theme='dark'] .navbar-logo {
+    color: var(--primary-dark);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+}
+.nav-link:hover {
+    color: var(--primary-light);
+    border-bottom: 3px solid var(--primary-light);
+}
+body[data-theme='dark'] .nav-link:hover {
+    color: var(--primary-dark);
+    border-bottom: 3px solid var(--primary-dark);
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: inherit;
+}
+
+.admin-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: var(--secondary-light);
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.admin-button:hover {
+    opacity: 0.9;
+}
+
+body[data-theme='dark'] .admin-button {
+    background-color: var(--secondary-dark);
+    color: var(--bg-dark);
+}
+
+.menu-icon {
+    display: none;
+}
+
+/* --- Responsive Styles --- */
+@media screen and (max-width: 960px) {
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 90vh;
+        position: absolute;
+        top: 80px;
+        left: -100%;
+        opacity: 1;
+        transition: all 0.5s ease;
+    }
+
+    .nav-menu.active {
+        left: 0;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 1;
+        padding-top: 3rem;
+    }
+    
+    body[data-theme='light'] .nav-menu.active { background: var(--bg-light); }
+    body[data-theme='dark'] .nav-menu.active { background: var(--bg-dark); }
+
+
+    .nav-link {
+        text-align: center;
+        padding: 2rem;
+        width: 100%;
+        display: table;
+    }
+    
+    .nav-link:hover {
+        border-bottom: none;
+    }
+
+    .menu-icon {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 60%);
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+    
+    .nav-icons {
+        /* Hide original icons to prevent overlap with hamburger menu */
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .admin-button-text {
+        display: none; /* Hide 'Admin' text on very small screens */
+    }
+    .admin-button {
+        padding: 8px 10px;
+    }
+}

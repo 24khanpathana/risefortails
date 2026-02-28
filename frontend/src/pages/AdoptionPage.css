@@ -1,0 +1,33 @@
+.adoption-page-container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.adoption-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 40px;
+}
+
+.animal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .adoption-title {
+        font-size: 2.5rem;
+    }
+    .animal-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .animal-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+}
