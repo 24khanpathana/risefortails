@@ -1,13 +1,19 @@
 const mongoose = require('mongoose');
 
 const DynamicContentSchema = new mongoose.Schema({
+    page: { 
+        type: String, 
+        required: true, 
+        enum:['Home', 'About', 'Team', 'Event', 'Service', 'Contact', 'Gallery'] 
+    },
     title: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String },
     imageUrl: { type: String, default: '' },
-    position: {
-        type: String,
-        required: true,
-        enum: ['above-home', 'below-home', 'below-about', 'below-contact', 'below-volunteer', 'below-feedback', 'below-complaints']
+    date: { type: Date }, 
+    role: { type: String },
+    customForm: {
+        title: String,
+        fields: [{ name: String, type: String }]
     },
     createdAt: { type: Date, default: Date.now },
 });

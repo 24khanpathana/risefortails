@@ -9,7 +9,11 @@ const Home = () => {
     return (
         <section id="home">
             <div className="hero-carousel">
-                <div className="hero-slide" style={{backgroundImage: `url('https://source.unsplash.com/1600x900/?animal,dog,rescue')`}}>
+                <video autoPlay loop muted playsInline className="hero-video">
+                    <source src="/BG.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                <div className="hero-slide">
                     <div className="hero-content">
                         <h1>Welcome to Rise for Tails</h1>
                         <p>Giving every animal a chance to live and be loved.</p>
@@ -37,11 +41,10 @@ const Home = () => {
                         <h3>Medical Support</h3>
                         <p>Our team provides essential medical care, vaccinations, and spay/neuter services.</p>
                     </div>
-                    {/* Updated Adoption Card */}
-                    <div className="info-card card-theme clickable" onClick={() => navigate('/animals-for-adoption')}>
+                    <div className="info-card card-theme">
                         <FaHandHoldingHeart className="info-icon text-primary-theme" />
                         <h3>Adoption</h3>
-                        <p>View animals currently available for adoption.</p>
+                        <p>We connect our rescued animals with loving forever homes through a careful adoption process.</p>
                     </div>
                     <div className="info-card card-theme">
                         <FaUsers className="info-icon text-primary-theme" />

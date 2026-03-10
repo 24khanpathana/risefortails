@@ -1,15 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
 const Admin = require('../models/Admin');
-const Setting = require('../models/Setting');
-const sendEmail = require('../models/sendEmail');
 const router = express.Router();
-const { protect } = require('../middleware/authMiddleware');
 
 // @route   POST /api/auth/login
-// @desc    Step 1: Authenticate admin, generate and send OTP
+// @desc    Authenticate admin and get token
 // @access  Public
 router.post('/login', async (req, res) => {
     const { adminId, password } = req.body;
@@ -24,62 +20,12 @@ router.post('/login', async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
-        
-        const settings = await Setting.findOne();
-        if (settings && settings.isOtpEnabled) {
-            // Generate 4-digit OTP
-            const otp = Math.floor(1000 + Math.random() * 9000).toString();
-            admin.otp = otp;
-            admin.otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
-            await admin.save();
 
-            // Send OTP via email
-            try {
-                await sendEmail({
-                    to: settings.otpEmails,
-                    subject: 'Your Login OTP for Rise for Tails Admin',
-                    message: `Your One-Time Password is: ${otp}\nIt is valid for 10 minutes.`,
-                });
-                res.status(200).json({ message: 'OTP sent to registered email.', otpRequired: true });
-            } catch (emailError) {
-                console.error(emailError);
-                return res.status(500).json({ message: 'Error sending OTP email.' });
-            }
-        } else {
-            // OTP is disabled, log in directly
-            const payload = { id: admin.id, adminId: admin.adminId };
-            const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '8h' });
-            res.json({ token, otpRequired: false });
-        }
+        const payload = {
+            id: admin.id,
+            adminId: admin.adminId
+        };
 
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send('Server Error');
-    }
-});
-
-// @route   POST /api/auth/verify-otp
-// @desc    Step 2: Verify OTP and get token
-// @access  Public
-router.post('/verify-otp', async (req, res) => {
-    const { adminId, otp } = req.body;
-    try {
-        const admin = await Admin.findOne({
-            adminId,
-            otp,
-            otpExpires: { $gt: Date.now() }
-        });
-
-        if (!admin) {
-            return res.status(400).json({ message: 'Invalid or expired OTP.' });
-        }
-        
-        // Clear OTP fields
-        admin.otp = undefined;
-        admin.otpExpires = undefined;
-        await admin.save();
-
-        const payload = { id: admin.id, adminId: admin.adminId };
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
@@ -96,29 +42,107 @@ router.post('/verify-otp', async (req, res) => {
     }
 });
 
+const crypto = require('crypto');
+const sendEmail = require('../utils/sendEmail');
 
-// @route   POST /api/auth/change-password
-// @desc    Change admin password
-// @access  Private
-router.post('/change-password', protect, async (req, res) => {
-    const { currentPassword, newPassword } = req.body;
-    // Assuming only one admin for now. In a multi-admin system, you'd get adminId from JWT.
-    const admin = await Admin.findOne(); 
+// @route   POST /api/auth/forgot-password
+// @desc    Send password reset email
+// @access  Public
+router.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
 
-    if (!admin) {
-        return res.status(404).json({ message: 'Admin not found.' });
+    try {
+        const admin = await Admin.findOne({ adminId: email });
+        if (!admin) {
+            // Send success response even if not found to prevent email enumeration
+            return res.status(200).json({ message: 'If that email exists, a reset link will be sent.' });
+        }
+
+        const resetToken = crypto.randomBytes(20).toString('hex');
+        
+        // Hash token for saving in database
+        const resetPasswordToken = crypto
+            .createHash('sha256')
+            .update(resetToken)
+            .digest('hex');
+
+        // Set expire for 15 minutes
+        const resetPasswordExpires = Date.now() + 15 * 60 * 1000;
+
+        admin.resetPasswordToken = resetPasswordToken;
+        admin.resetPasswordExpires = resetPasswordExpires;
+        await admin.save();
+
+        const resetUrl = `${process.env.FRONTEND_URL}/admin/reset-password?token=${resetToken}`;
+
+        const message = `
+            <h1>You have requested a password reset</h1>
+            <p>Please click on the following link to reset your password:</p>
+            <a href="${resetUrl}" clicktracking="off">${resetUrl}</a>
+            <p>This link is valid for 15 minutes.</p>
+        `;
+
+        try {
+            await sendEmail({
+                to: admin.adminId,
+                subject: 'Password Reset Request',
+                htmlContent: message,
+            });
+
+            res.status(200).json({ message: 'If that email exists, a reset link will be sent.' });
+        } catch (error) {
+            console.error('Email sending failed error:', error);
+            
+            // Clean up if email failed
+            admin.resetPasswordToken = undefined;
+            admin.resetPasswordExpires = undefined;
+            await admin.save();
+
+            return res.status(500).json({ message: 'Email could not be sent' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
     }
+});
 
-    const isMatch = await bcrypt.compare(currentPassword, admin.password);
-    if (!isMatch) {
-        return res.status(400).json({ message: 'Incorrect current password.' });
+// @route   POST /api/auth/reset-password
+// @desc    Reset password using token
+// @access  Public
+router.post('/reset-password', async (req, res) => {
+    const { token, password } = req.body;
+
+    // Recreate hash from token to find in DB
+    const resetPasswordToken = crypto
+        .createHash('sha256')
+        .update(token)
+        .digest('hex');
+
+    try {
+        const admin = await Admin.findOne({
+            resetPasswordToken,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+
+        if (!admin) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        // Hash new password
+        const salt = await bcrypt.genSalt(10);
+        admin.password = await bcrypt.hash(password, salt);
+
+        // Clear reset properties
+        admin.resetPasswordToken = undefined;
+        admin.resetPasswordExpires = undefined;
+
+        await admin.save();
+
+        res.status(200).json({ message: 'Password reset successful!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
     }
-
-    const salt = await bcrypt.genSalt(10);
-    admin.password = await bcrypt.hash(newPassword, salt);
-    await admin.save();
-
-    res.json({ message: 'Password updated successfully.' });
 });
 
 module.exports = router;

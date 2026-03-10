@@ -1,0 +1,150 @@
+/* Hero Section (Home) */
+.hero-wrapper {
+    height: 80vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 80px;
+}
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    max-width: 800px;
+}
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.hero-buttons .button-primary {
+    width: auto;
+}
+
+
+/* Common Page Styles */
+.page-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Cards Specifics */
+.icon-card {
+    text-align: center;
+}
+.icon-card:hover {
+    transform: translateY(-10px);
+}
+.card-icon {
+    font-size: 3rem;
+    color: var(--primary-light);
+    margin-bottom: 20px;
+}
+body[data-theme='dark'] .card-icon { color: var(--primary-dark); }
+
+.content-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.team-image-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px auto;
+    border: 3px solid var(--primary-light);
+}
+.team-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Pet Adoption Cards */
+.pet-card {
+    background-color: var(--card-bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+body[data-theme='dark'] .pet-card {
+    background-color: var(--card-bg-dark);
+    border-color: var(--border-dark);
+}
+.pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+.pet-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.pet-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.pet-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-light);
+    margin-bottom: 10px;
+}
+body[data-theme='dark'] .pet-name { color: var(--primary-dark); }
+.pet-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+.pet-desc {
+    font-size: 0.9rem;
+    color: var(--secondary-light);
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+.adopt-btn {
+    width: 100%;
+    margin-top: auto;
+}
