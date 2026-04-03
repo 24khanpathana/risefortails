@@ -37,4 +37,26 @@ router.get('/', protect, async (req, res) => {
     }
 });
 
+// @route   DELETE /api/complaints/:id
+// @access  Private (Admin)
+router.delete('/:id', protect, async (req, res) => {
+    try {
+        await Complaint.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Complaint deleted successfully' });
+    } catch (error) { 
+        res.status(500).json({ message: 'Server error', error }); 
+    }
+});
+
+// @route   DELETE /api/complaints/:id
+// @access  Private (Admin)
+router.delete('/:id', protect, async (req, res) => {
+    try {
+        await Complaint.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Complaint deleted successfully' });
+    } catch (error) { 
+        res.status(500).json({ message: 'Server error', error }); 
+    }
+});
+
 module.exports = router;

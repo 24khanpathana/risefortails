@@ -1,151 +1,30 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 transition-colors duration-300;
+  }
+  body[data-theme='dark'] {
+    @apply bg-darkBg text-gray-100;
+  }
 }
 
-/* Theme Variables */
-:root {
-    --bg-light: #ffffff;
-    --text-light: #212529;
-    --primary-light: #007bff;
-    --primary-hover: #0056b3;
-    --secondary-light: #6c757d;
-    --card-bg-light: #f8f9fa;
-    --border-light: #dee2e6;
-
-    --bg-dark: #121212;
-    --text-dark: #f3f4f6;
-    --primary-dark: #4dabf7;
-    --secondary-dark: #adb5bd;
-    --card-bg-dark: #1e1e1e;
-    --border-dark: #495057;
-}
-
-body {
-    transition: background-color 0.3s, color 0.3s;
-}
-
-body[data-theme='light'] {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-}
-
-body[data-theme='dark'] {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
-}
-
-/* Typography & Utilities */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--primary-light);
-}
-body[data-theme='dark'] .section-title {
-    color: var(--primary-dark);
-}
-
-.text-center { text-align: center; }
-.mb-20 { margin-bottom: 20px; }
-.mb-40 { margin-bottom: 40px; }
-
-/* Buttons */
-.button-primary {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    background-color: var(--primary-light);
-    color: #fff;
-    width: 100%;
-}
-.button-primary:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-}
-body[data-theme='dark'] .button-primary {
-    background-color: var(--primary-dark);
-    color: var(--bg-dark);
-}
-body[data-theme='dark'] .button-primary:hover {
-    opacity: 0.9;
-}
-
-/* Forms */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    text-transform: capitalize;
-}
-.form-control {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    background-color: var(--bg-light);
-    color: var(--text-light);
-    transition: border-color 0.3s;
-}
-body[data-theme='dark'] .form-control {
-    background-color: var(--card-bg-dark);
-    color: var(--text-dark);
-    border: 1px solid var(--border-dark);
-}
-.form-control:focus {
-    outline: none;
-    border-color: var(--primary-light);
-}
-
-/* Cards */
-.card {
-    background-color: var(--card-bg-light);
-    border: 1px solid var(--border-light);
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-}
-body[data-theme='dark'] .card {
-    background-color: var(--card-bg-dark);
-    border-color: var(--border-dark);
-}
-
-/* Responsive Grid */
-.grid-container {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: 1fr;
-}
-@media (min-width: 768px) {
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .grid-4 { grid-template-columns: repeat(4, 1fr); }
-}
-
-/* Layout Spacing */
-.page-section {
-    padding: 80px 0;
-    min-height: calc(100vh - 80px);
+@layer components {
+  .btn-primary {
+    @apply w-full md:w-auto inline-block bg-primary hover:bg-primaryHover text-white font-semibold py-3 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:-translate-y-1 text-center cursor-pointer shadow-md;
+  }
+  .input-field {
+    @apply w-full p-3 border border-gray-300 rounded-lg bg-gray-50 dark:bg-[#2a2a2a] dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all;
+  }
+  .card {
+    @apply bg-white dark:bg-darkCard border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-center text-primary mb-12;
+  }
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-[calc(100vh-80px)];
+  }
 }
