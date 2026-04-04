@@ -37,4 +37,17 @@ router.get('/', protect, async (req, res) => {
     }
 });
 
+// @route   DELETE /api/feedback/:id
+// @access  Private (Admin)
+router.delete('/:id', protect, async (req, res) => {
+    try {
+        await Feedback.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Feedback deleted successfully' });
+    } catch (error) { 
+        res.status(500).json({ message: 'Server error', error }); 
+    }
+});
+
+
+
 module.exports = router;

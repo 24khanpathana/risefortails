@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './FormPages.css';
 
 const AdminLogin = () => {
     const [formData, setFormData] = useState({ adminId: '', password: '' });
@@ -10,44 +9,35 @@ const AdminLogin = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
 
-    const handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
     const handleSubmit = async e => {
-        e.preventDefault();
-        setError('');
+        e.preventDefault(); setError('');
         try {
             const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, formData);
-            login(res.data.token);
-            navigate('/admin/dashboard');
-        } catch (err) {
-            setError(err.response?.data?.message || 'Login failed');
-        }
+            login(res.data.token); navigate('/admin/dashboard');
+        } catch (err) { setError(err.response?.data?.message || 'Login failed'); }
     };
 
     return (
-        <div className="form-page-container">
-            <div className="form-container card-theme">
-                <h2 className="form-title text-primary-theme">Admin Login</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Admin Email</label>
-                        <input type="text" name="adminId" value={formData.adminId} onChange={handleChange} className="form-control" required />
+        <div className="min-h-[calc(100vh-80px)] flex items-center justify-center p-4">
+            <div className="card w-full max-w-md">
+                <h2 className="section-title !mb-8">Admin Login</h2>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                        <label className="block text-sm font-medium mb-2">Admin Email</label>
+                        <input type="email" required className="input-field" onChange={e => setFormData({...formData, adminId: e.target.value})} />
                     </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" name="password" value={formData.password} onChange={handleChange} className="form-control" required />
+                    <div>
+                        <label className="block text-sm font-medium mb-2">Password</label>
+                        <input type="password" required className="input-field" onChange={e => setFormData({...formData, password: e.target.value})} />
                     </div>
-                    <button type="submit" className="button-primary" style={{ marginBottom: '15px' }}>Login</button>
-                    <div className="form-group" style={{ textAlign: 'center' }}>
-                        <a href="/admin/forgot-password" className="text-primary-theme" style={{ textDecoration: 'none', fontSize: '0.9rem' }}>
-                            Forgot Password?
-                        </a>
+                    <button type="submit" className="btn-primary w-full">Login</button>
+                    <div className="text-center mt-4">
+                        <a href="/admin/forgot-password" className="text-sm text-primary hover:underline">Forgot Password?</a>
                     </div>
                 </form>
-                {error && <p className="form-message error">{error}</p>}
+                {error && <p className="text-red-500 text-center mt-4 font-medium">{error}</p>}
             </div>
         </div>
     );
 };
-
 export default AdminLogin;

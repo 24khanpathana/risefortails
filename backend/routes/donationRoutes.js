@@ -81,4 +81,23 @@ router.get('/', protect, async (req, res) => {
     }
 });
 
+// Add this before module.exports
+router.delete('/:id', protect, async (req, res) => {
+    try {
+        await Donation.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Donation deleted successfully' });
+    } catch (error) { res.status(500).json({ message: 'Server error' }); }
+});
+
+// @route   DELETE /api/donations/:id
+// @access  Private (Admin)
+router.delete('/:id', protect, async (req, res) => {
+    try {
+        await Donation.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Donation deleted successfully' });
+    } catch (error) { 
+        res.status(500).json({ message: 'Server error', error }); 
+    }
+});
+
 module.exports = router;
