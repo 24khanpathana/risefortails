@@ -64,4 +64,24 @@ app.use("/api/forms", require("./routes/formRoutes")); // <-- New
 app.use("/api/animals", require("./routes/animalRoutes"));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+server.on('error', (error) => {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  const bind = typeof PORT === 'string' ? `Pipe ${PORT}` : `Port ${PORT}`;
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges.`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use. Please stop the process using the port or set a different PORT in your environment.`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+});
