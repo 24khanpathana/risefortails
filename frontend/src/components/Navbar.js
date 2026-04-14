@@ -9,10 +9,16 @@ const Navbar = ({ theme, setTheme }) => {
     const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
     const closeMenu = () => setIsMenuOpen(false);
 
+    // Added Team and Gallery to the links array
     const links =[
-        { name: 'Home', path: '/' }, { name: 'About', path: '/about' },
-        { name: 'Events', path: '/events' }, { name: 'Adoption', path: '/adoption' }, 
-        { name: 'Service', path: '/service' }, { name: 'Contact', path: '/contact' }
+        { name: 'Home', path: '/' }, 
+        { name: 'About', path: '/about' },
+        { name: 'Team', path: '/team' }, 
+        { name: 'Events', path: '/events' }, 
+        { name: 'Gallery', path: '/gallery' }, 
+        { name: 'Adoption', path: '/adoption' }, 
+        { name: 'Service', path: '/service' }, 
+        { name: 'Contact', path: '/contact' }
     ];
 
     return (
