@@ -28,7 +28,7 @@ const Navbar = ({ theme, setTheme }) => {
                 {/* Logo Left */}
                 <Link to="/" onClick={closeMenu} className="flex items-center gap-3 z-50 group">
                     <img src="https://tse1.mm.bing.net/th/id/OIP.Roc8Aj63hu6E9py24OG4IAHaFO?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo" className="w-20 h-10 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300" />
-                    <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Rise for Tails</span>
+                    <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Demo Mode</span>
                 </Link>
 
                 {/* Links Right */}

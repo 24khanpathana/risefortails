@@ -34,7 +34,7 @@ const About = () => {
                                 Central India lacked any formal rescue or rehabilitation infrastructure. We realized that feeding them wasn't enough; they were dying from treatable conditions. It was at that moment we decided to build what did not exist.
                             </p>
                             <p className="font-semibold text-gray-900 border-l-4 border-primary pl-4">
-                                Today, Rise for Tails operates a full-scale rescue and treatment centre in Nagpur, equipped with full-time veterinary doctors, surgical infrastructure, and recovery facilities.
+                                Today, our operates a full-scale rescue and treatment centre in Nagpur, equipped with full-time veterinary doctors, surgical infrastructure, and recovery facilities.
                             </p>
                         </div>
                     </div>
@@ -61,8 +61,8 @@ const About = () => {
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="Gargi Vairagare" className="w-full h-full object-cover" />
                         </div>
                         <div className="text-left">
-                            <p className="font-bold text-lg">Gargi Vairagare</p>
-                            <p className="text-gray-400 text-sm">Founder, RISE (Founded at age 17)</p>
+                            <p className="font-bold text-lg">Demo </p>
+                            <p className="text-gray-400 text-sm">Founder, ngo (Founded at age 17)</p>
                         </div>
                     </div>
                 </div>
