@@ -15,7 +15,7 @@ const Donation = () => {
             const { data: { id, amount } } = await axios.post(`${process.env.REACT_APP_API_URL}/api/donations/order`, { amount: formData.amount });
 
             const options = {
-                key, amount, currency: "INR", name: "Rise for Tails", description: "Donation for Animal Welfare", order_id: id,
+                key, amount, currency: "INR", name: "Ngo Demo", description: "Donation for Animal Welfare", order_id: id,
                 handler: async function (response) {
                     try {
                         const verifyUrl = `${process.env.REACT_APP_API_URL}/api/donations/verify`;

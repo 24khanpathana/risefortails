@@ -92,7 +92,7 @@ const Events = () => {
                                         </div>
                                     ) : (
                                         <div className="w-full h-56 bg-emerald-100 flex items-center justify-center">
-                                            <span className="text-emerald-800 font-bold opacity-50">Rise for Tails Event</span>
+                                            <span className="text-emerald-800 font-bold opacity-50">Ngo Event</span>
                                         </div>
                                     )}
                                     <div className="p-8 flex-grow flex flex-col">

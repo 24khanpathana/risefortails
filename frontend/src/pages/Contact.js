@@ -50,7 +50,7 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h4 className="font-semibold text-gray-900 dark:text-white">Our Location</h4>
-                                <p className="text-gray-500 dark:text-gray-400 mt-1">Rise for Tails Rescue Centre<br/>Nagpur, Maharashtra, India</p>
+                                <p className="text-gray-500 dark:text-gray-400 mt-1">Animal Rescue Centre<br/>Nagpur, Maharashtra, India</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
@@ -59,7 +59,7 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h4 className="font-semibold text-gray-900 dark:text-white">Email Us</h4>
-                                <p className="text-gray-500 dark:text-gray-400 mt-1">contact@risefortails.org</p>
+                                <p className="text-gray-500 dark:text-gray-400 mt-1">contact@ngo-demo.org</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
@@ -68,7 +68,7 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h4 className="font-semibold text-gray-900 dark:text-white">Call Us</h4>
-                                <p className="text-gray-500 dark:text-gray-400 mt-1">+91 98765 43210</p>
+                                <p className="text-gray-500 dark:text-gray-400 mt-1">+91 75883 xxxxx</p>
                             </div>
                         </div>
                     </div>

@@ -315,12 +315,12 @@ const Home = () => {
                                 <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
                                     <div className="bg-emerald-100 w-12 h-12 rounded-full flex items-center justify-center text-emerald-700 mb-4"><FaHome size={20}/></div>
                                     <p className="font-bold text-gray-900 mb-1">Our Location</p>
-                                    <p className="text-gray-500 text-sm">Rise for Tails Rescue Centre<br/>Nagpur, Maharashtra, India</p>
+                                    <p className="text-gray-500 text-sm">Animal Rescue Centre<br/>Nagpur, Maharashtra, India</p>
                                 </div>
                                 <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
                                     <div className="bg-emerald-100 w-12 h-12 rounded-full flex items-center justify-center text-emerald-700 mb-4"><FaPhoneAlt size={18}/></div>
                                     <p className="font-bold text-gray-900 mb-1">Contact Us</p>
-                                    <p className="text-gray-500 text-sm">Emergency: +91 98765 XXXXX<br/>Email: contact@risefortails.org</p>
+                                    <p className="text-gray-500 text-sm">Emergency: +91 98765 XXXXX<br/>Email: contact@ngodemo.org</p>
                                 </div>
                             </div>
                             

@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className="md:col-span-1">
                     <Link to="/" className="flex items-center gap-3 mb-4">
                         <img src="/logo192.png" alt="Logo" className="w-8 h-8 rounded-full" />
-                        <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Rise for Tails</span>
+                        <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Ngo Demo</span>
                     </Link>
                     <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6">
                         Dedicated to rescuing, rehabilitating, and rehoming animals. Giving every animal a chance to live and be loved.
@@ -44,15 +44,15 @@ const Footer = () => {
                 <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Contact</h4>
                     <ul className="space-y-3 text-sm text-gray-500 dark:text-gray-400">
-                        <li>Rise for Tails Rescue Centre</li>
+                        <li>Animal Rescue Centre</li>
                         <li>Nagpur, Maharashtra, India</li>
-                        <li>contact@risefortails.org</li>
+                        <li>contact@ngo-demo.org</li>
                         <li>+91 98765 43210</li>
                     </ul>
                 </div>
             </div>
             <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-8 border-t border-gray-100 dark:border-gray-800 text-sm text-gray-400 flex flex-col md:flex-row justify-between items-center">
-                <p>&copy; {new Date().getFullYear()} Rise for Tails. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Ngo Demo. All rights reserved.</p>
                 <div className="space-x-4 mt-4 md:mt-0">
                     <a href="#" className="hover:text-gray-900 dark:hover:text-white transition">Privacy Policy</a>
                     <a href="#" className="hover:text-gray-900 dark:hover:text-white transition">Terms of Service</a>

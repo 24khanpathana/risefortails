@@ -9,7 +9,7 @@ const Team = () => {
         <div className="w-full font-sans text-gray-800 bg-white min-h-screen pb-20">
             <div className="bg-emerald-900 text-white py-16 md:py-24 text-center px-4 mb-16">
                 <h1 className="text-4xl md:text-6xl font-serif font-bold mb-4">Meet Our Team</h1>
-                <p className="text-emerald-100 text-lg md:text-xl max-w-2xl mx-auto">The dedicated individuals behind Rise for Tails making a difference every single day.</p>
+                <p className="text-emerald-100 text-lg md:text-xl max-w-2xl mx-auto">The dedicated individuals behind Ngo Demo making a difference every single day.</p>
             </div>
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">

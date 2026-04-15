@@ -43,7 +43,7 @@ const Gallery = () => {
                                     />
                                 ) : (
                                     <div className="w-full h-full bg-emerald-100 flex items-center justify-center text-emerald-800 font-bold opacity-50">
-                                        Rise for Tails
+                                        Ngo Demo
                                     </div>
                                 )}
                             </div>
